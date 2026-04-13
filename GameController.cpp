@@ -35,7 +35,7 @@ void GameController::tick() {
 
 			// Tijdelijke test: ga na 3 seconden naar CORRECT
 			if (now - _stateStartTime >= 3000) {
-				setState(STATE_CORRECT);
+				setState(GS_PLANETS_MISSION_WON);
 			}
 			break;
 
