@@ -16,7 +16,7 @@
 class GameController {
 public:
 	// Constructor: GameController krijgt de andere modules mee
-	GameController(LedAnimator& leds, ButtonManager& buttons, AudioPlayer& audio);
+	GameController(LedController& leds, ButtonController& buttons, AudioController& audio);
 
 	void begin();
 	void tick();
@@ -46,9 +46,9 @@ private:
 	
 	State 			_state; // Dit is de gameState
 	unsigned long 	_stateStartTime; // is de millis bij aanvang van een gameState
-	LedAnimator& 	_leds; // Een verwijzing naar de ledController
-	ButtonManager& 	_buttons; // Een verwijzing naar de buttonController
-	AudioPlayer& 	_audio; // Een verwijzing naar de audioController
+	LedController& 	_leds; // Een verwijzing naar de ledController
+	ButtonController& 	_buttons; // Een verwijzing naar de buttonController
+	AudioController& 	_audio; // Een verwijzing naar de audioController
 
 	// In deze class is er deze hulpfunctie die om debuggen en controle
 	// wat makkelijker te maken, telkens de nieuwe gameState print en 
