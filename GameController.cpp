@@ -1,8 +1,8 @@
 #include "GameController.h"
 #include "Config.h"
 
-GameController::GameController(LedAnimator& leds, ButtonManager& buttons, AudioPlayer& audio)
-	: _state(STATE_STARTUP),
+GameController::GameController(LedController& leds, ButtonController& buttons, AudioController& audio)
+	: _state(GS_OPSTARTEN),
 	  _stateStartTime(0),
 	  _leds(leds),
 	  _buttons(buttons),
