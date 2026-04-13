@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include "Config.h"
 #include "GameController.h"
-#include "LedAnimator.h"
-#include "ButtonManager.h"
-#include "AudioPlayer.h"
+#include "LedController.h"
+#include "ButtonController.h"
+#include "AudioController.h"
 #include "BlinkerLed.h"
 
-LedAnimator leds;
-ButtonManager buttons;
-AudioPlayer audio;
+LedController leds;
+ButtonController buttons;
+AudioController audio;
 BlinkerLed controleLed;
 
 // GameController krijgt toegang tot leds, buttons en audio
