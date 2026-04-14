@@ -11,12 +11,13 @@ ButtonController buttons;
 AudioController audio;
 BlinkerLed controleLed;
 
+void setupSerial();
+
 // GameController krijgt toegang tot leds, buttons en audio
 GameController game(leds, buttons, audio);
 
 void setup() {
-	Serial.begin(115200);
-
+	setupSerial();
 	buttons.begin();
 	leds.begin();
 	audio.begin();
@@ -30,4 +31,10 @@ void loop() {
 	leds.tick();
 	game.tick();
 	controleLed.tick();
+}
+
+void setupSerial(){
+	Serial.begin(115200);
+	delay(100);
+	Serial.println("System start...");
 }
