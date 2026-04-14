@@ -24,6 +24,7 @@ private:
 	// Mogelijke toestanden van de ledcontroller
 	enum LedState {
 		LS_OPSTARTEN,
+		LS_IDLE,
 		LS_ALL_OFF,
 		LS_DROP_EFFECT,
 		LS_OFF,
