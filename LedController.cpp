@@ -5,15 +5,26 @@
 
 LedController::LedController()
 	: _state(LS_OPSTARTEN),
-	  _stateStartTime(0) {
+	  _stateStartTime(0),
+	  _lastBlinkTime(0),
+	  _blinkPhaseOn(false),
+	  _r(0),
+	  _g(0),
+	  _b(0),
+	  _blinkIntervalMs(500),
+	  _strip(NUMPIXELS, PIN_LEDSTRIP, NEO_GRB + NEO_KHZ800) {
 }
 
 void LedController::begin() {
-	Adafruit_NeoPixel pixels(NUMPIXELS, PIN_LEDSTRIP, NEO_GRB + NEO_KHZ800);
+	_strip.begin();
+	_strip.clear();
+	_strip.show();
+
 	if (DEBUG) {
-		printf("Ledstrip met %d leds aangesloten op pin %d", NUMPIXELS, PIN_LEDSTRIP);
+		Serial.printf("Ledstrip met %d leds aangesloten op pin %d\n", NUMPIXELS, PIN_LEDSTRIP);
 	}
-	setState(LS_OPSTARTEN);
+
+	setLedState(LS_OPSTARTEN);
 }
 
 void LedController::tick() {
