@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#include <Adafruit_NeoPixel.h>
 #include "LedController.h"
 #include "Config.h"
 
