@@ -25,7 +25,7 @@ private:
 	enum LedState {
 		LS_OPSTARTEN,
 		LS_ALL_OFF,
-		LS_DROP_EFFECT
+		LS_DROP_EFFECT,
 		LS_OFF,
 		LS_ON_COLOR,
 		LS_BLINK_COLOR
