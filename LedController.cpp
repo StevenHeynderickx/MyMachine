@@ -1,5 +1,5 @@
 #include "LedController.h"
-// #include "Config.h"
+#include "Config.h"
 
 LedController::LedController()
 	: _state(LS_OPSTARTEN),
@@ -7,8 +7,10 @@ LedController::LedController()
 }
 
 void LedController::begin() {
-	// Het enige dat hier voorlopig gebeurd is 
-	// dat de gameState op "GS_OPSTARTEN" wordt gezet.
+	Adafruit_NeoPixel pixels(NUMPIXELS, PIN_LEDSTRIP, NEO_GRB + NEO_KHZ800);
+	if (DEBUG) {
+		printf("Ledstrip met %d leds aangesloten op pin %d", NUMPIXELS, PIN_LEDSTRIP);
+	}
 	setState(LS_OPSTARTEN);
 }
 
