@@ -1,7 +1,4 @@
-#include <Arduino.h>
-#include <Adafruit_NeoPixel.h>
 #include "LedController.h"
-#include "Config.h"
 
 LedController::LedController()
 	: _state(LS_OPSTARTEN),
@@ -16,14 +13,15 @@ LedController::LedController()
 }
 
 void LedController::begin() {
+	// Het _strip object dat in de header-file is aangemaakt wordt
+	// hier gestart, de ledkleurenbuffer wordt op nul gezet (alle leds uit)
+	// Deze buffer wordt dan naar de strip gestuurd.
 	_strip.begin();
-	_strip.clear();
-	_strip.show();
+	allOff();
 
 	if (DEBUG) {
 		Serial.printf("Ledstrip met %d leds aangesloten op pin %d\n", NUMPIXELS, PIN_LEDSTRIP);
 	}
-
 	setLedState(LS_OPSTARTEN);
 }
 
@@ -33,6 +31,12 @@ void LedController::tick() {
 	switch (_state) {
 		case LS_OPSTARTEN:
 			// Herkenbare animatie om aan te geven dat de Ledstrips werken
+			if (now - _stateStartTime > 3000){
+				setLedState(LS_IDLE);
+			}
+			break;
+		case LS_IDLE:
+			// wacht gewoon
 			break;
 		case LS_ALL_OFF:
 			// Zet alle ledStrips uit
@@ -51,9 +55,9 @@ void LedController::tick() {
 			// Kan gebruikt worden als tijdsaanduiding
 			break;
 		default:
-			Serial.print("In LedController tick(), state");
+			Serial.print("In LedController tick(), state ");
 			Serial.print(_state);
-			Serial.println("onbekend");
+			Serial.println(" onbekend");
 	}
 		
 }
@@ -65,6 +69,9 @@ void LedController::setLedState(LedState newState) {
 	switch (_state) {
 		case LS_OPSTARTEN:
 			Serial.println("LS_OPSTARTEN");
+			break;
+		case LS_IDLE:
+			Serial.println("LS_IDLE");
 			break;
 		case LS_ALL_OFF:
 			Serial.println("LS_ALL_OFF");
@@ -82,8 +89,33 @@ void LedController::setLedState(LedState newState) {
 			Serial.println("LS_DROP_EFFECT");
 			break;
 		default:
-			Serial.print("In LedController, state");
+			Serial.print("In LedController, state ");
 			Serial.print(_state);
-			Serial.println("onbekend");
+			Serial.println(" onbekend");
 	}
+
+}
+void LedController::showColor(uint8_t r, uint8_t g, uint8_t b){
+	Serial.printf("Volgende kleurcombinatie zit in het geheugen %d %d %d\n", r, g, b);
+}
+
+void LedController::allOff(){
+	_strip.clear();
+	_strip.show();
+}
+void LedController::allOn(uint8_t r, uint8_t g, uint8_t b){
+	_strip.fill(_strip.Color(r, g, b));
+	_strip.show();		
+}
+void LedController::blink(uint8_t r, uint8_t g, uint8_t b, unsigned long intervalMs){
+	
+}
+void LedController::setLedStateOff(){
+	
+}
+void LedController::setLedStateOnColor(uint8_t r, uint8_t g, uint8_t b){
+	
+}
+void LedController::setLedStateBlinkColor(uint8_t r, uint8_t g, uint8_t b, unsigned long intervalMs){
+	
 }
